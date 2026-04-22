@@ -1,20 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from .models import Sneaker
 # Create your views here.
 
-class Sneaker:
-    def __init__(self, brand, model, colorway, releasedate):
-        self.brand = brand
-        self.model = model
-        self.colorway = colorway
-        self.resleasedate = releasedate
 
-sneakers = [
-    Sneaker('Nike', 'Huarache', 'Scream Green', 1991),
-    Sneaker('Air Jordan', 'VII', 'Playoff', 1992),
-    Sneaker('Reebok', 'Pump', 'White', 1989),
-    Sneaker('Adidas', 'Crazy 8', 'Purple', 1997),
-]
 
 def home(request):
     return render(request, 'home.html')
@@ -24,3 +14,20 @@ def about(request):
 
 def sneaker_index(request):
     return render(request, 'sneakers/index.html', {'sneakers': sneakers})
+
+def sneaker_detail(request, sneaker_id):
+    sneaker = Sneaker.objects.get(id=sneaker_id)
+    return render(request, 'sneakers/detail.html', {'sneaker': sneaker})
+
+class SneakerCreate(CreateView):
+    model = Sneaker
+    fields = '__all__'
+    # success_url = '/sneakers/'
+
+class SneakerUpdate(UpdateView):
+    model = Sneaker
+    fields = ['brand', 'model', 'colorway', 'releasedate']
+
+class SneakerDelete(DeleteView):
+    model = Sneaker
+    success_url = '/sneakers/'
