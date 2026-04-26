@@ -1,0 +1,52 @@
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{% static 'css/sneakers/sneaker-index.css' %}"
+/>
+{% endblock %} {% block content %}
+
+<section class="page-header">
+  <h1>Sneaker List</h1>
+  <img
+    src="{% static 'images/cool-sneaker.svg' %}"
+    alt="A cool sneaker"
+  />
+  <img
+    src="{% static 'images/happy-sneaker.svg' %}"
+    alt="A happy sneaker"
+  />
+  <img
+    src="{% static 'images/teacup-sneaker.svg' %}"
+    alt="A sneaker in a teacup"
+  />
+  <img
+    src="{% static 'images/sneaker-in-box.svg' %}"
+    alt="A sneaker in a box"
+  />
+</section>
+
+<section class="card-container">
+  {% for sneaker in sneakers %}
+  <div class="card">
+    <a href="{% url 'sneaker-detail' sneaker.id %}">
+    <div class="card-content">
+      <div class="card-img-container">
+        <img
+          src="{% static 'images/sk8r-boi-cat.svg' %}"
+          alt="A skater boy sneaker"
+        />
+      </div>
+      <h2 class="card-title">{{ sneaker.name }}</h2>
+      {% if sneaker.age > 0 %}
+      <p>A {{ sneaker.age }} year old {{ sneaker.breed }}</p>
+      {% else %}
+      <p>A {{ sneaker.breed }} kitten.</p>
+      {% endif %}
+      <p><small>{{ sneaker.description }}</small></p>
+    </div>
+   </a>
+  </div>
+  {% endfor %}
+</section>
+
+{% endblock %}
