@@ -50,3 +50,19 @@
 </section>
 
 {% endblock %}
+
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Sneaker List</h1>
+
+{% for sneaker in sneakers %}
+  <div class="sneaker-card">
+    <a href="{% url 'sneaker-detail' sneaker.id %}">
+      <h3>{{ sneaker.brand }} - {{ sneaker.model }}</h3>
+    </a>
+    <p>{{ sneaker.colorway }}</p>
+  </div>
+{% endfor %}
+
+{% endblock %}

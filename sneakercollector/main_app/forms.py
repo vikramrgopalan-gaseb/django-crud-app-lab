@@ -1,16 +1,14 @@
 from django import forms
-from .models import Condition
+from .models import Collection
 
-class ConditionForm(forms.ModelForm):
+class CollectingForm(forms.ModelForm):
     class Meta:
-        model = Condition
-        fields = ['DS', 'NDS', 'W']
+        model = Collection
+        # Ensure these match the variable names in class Collection(models.Model)
+        fields = ['date', 'condition']
         widgets = {
             'date': forms.DateInput(
                 format=('%Y-%m-%d'),
-                attrs={
-                    'placeholder': 'Select a Date',
-                    'type': 'date'
-                }
-            )
+                attrs={'type': 'date'}
+            ),
         }

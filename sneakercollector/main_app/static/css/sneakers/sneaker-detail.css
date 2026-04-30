@@ -1,0 +1,76 @@
+/* static/css/sneakers/detail.css */
+
+.sneaker-details {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    margin-bottom: 2rem;
+}
+
+.sneaker-details h1 {
+    color: #ff4757; /* Sneaker Red */
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.sneaker-details p {
+    font-size: 1.1rem;
+    margin: 5px 0;
+    color: #555;
+}
+
+/* Action Buttons (Edit/Delete) */
+.actions {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 10px;
+}
+
+/* Collection Log Section */
+.collection-section {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 12px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+th {
+    text-align: left;
+    padding: 12px;
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #eee;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+tr:hover {
+    background-color: #fcfcfc;
+}
+
+/* Add Log Form Styling */
+.collection-section form {
+    background: #fdfdfd;
+    border: 1px solid #eee;
+    padding: 1rem;
+    box-shadow: none; /* Keep it simpler than the main form */
+    margin-bottom: 2rem;
+}
+
+/* Condition Tags (from the Many-to-Many section) */
+.card {
+    display: inline-block;
+    padding: 8px 15px;
+    margin: 5px;
+    background: #f1f1f1;
+    border-radius: 20px;
+    font-weight: bold;
+}

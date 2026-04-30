@@ -56,3 +56,67 @@
   </section>
 </div>
 {% endblock %}
+
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="sneaker-details">
+  <h1>{{ sneaker.brand }} {{ sneaker.model }}</h1>
+  <p>Colorway: {{ sneaker.colorway }}</p>
+  <p>Year: {{ sneaker.year }}</p>
+  
+  <div class="actions">
+    <a href="{% url 'sneaker-update' sneaker.id %}">Edit</a>
+    <a href="{% url 'sneaker-delete' sneaker.id %}">Delete</a>
+  </div>
+</div>
+
+<hr>
+
+<div class="collection-section">
+  <h3>Collection Log</h3>
+  <!-- Form to add a new Collection entry -->
+  <form action="{% url 'add-collecting' sneaker.id %}" method="POST">
+    {% csrf_token %}
+    {{ collecting_form.as_p }}
+    <button type="submit">Add Log Entry</button>
+  </form>
+
+  <table>
+    <thead>
+      <tr><th>Date</th><th>Condition</th></tr>
+    </thead>
+    <tbody>
+      {% for item in sneaker.collection_set.all %}
+        <tr>
+          <td>{{ item.date }}</td>
+          <td>{{ item.get_meal_display }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}
+
+<div class="available-conditions">
+  <h3>Available Conditions for this Sneaker</h3>
+  {% if condition.count %}
+    {% for cond in condition %}
+      <div class="card">
+        <div class="card-content" style="color: {{ cond.color }}">
+          <span>{{ cond.name }}</span>
+        </div>
+        <div class="card-action">
+          <!-- This form triggers your associate_condition view -->
+          <form action="{% url 'associate-condition' sneaker.id cond.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn">Add</button>
+          </form>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <h5>All available conditions have been assigned.</h5>
+  {% endif %}
+</div>

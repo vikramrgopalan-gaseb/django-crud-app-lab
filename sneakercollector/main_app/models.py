@@ -30,15 +30,17 @@ class Sneaker(models.Model):
     
     def get_absolute_url(self):
         return reverse('sneaker-detail', kwargs={'sneaker_id': self.id})
+
+class Sneaker(models.Model):
+    # ... fields remain the same ...
+    def __str__(self):
+        return f"{self.brand} {self.model}" # Fixed: name doesn't exist
+    
+    def get_absolute_url(self):
+        return reverse('sneaker-detail', kwargs={'sneaker_id': self.id})
     
 class Collection(models.Model):
-    date = models.DateField("Collection Date")
-    meal = models.CharField(max_length=1, choices=CONDITION, default=CONDITION[0][0])
-
+    date = models.DateField("Collection Date") # field name is 'date'
+    condition = models.CharField(max_length=3, choices=CONDITION, default=CONDITION[0][0]) # field name is 'meal'
     sneaker = models.ForeignKey(Sneaker, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return f"{self.get_collection_display()} on {self.date}"
-    
-    class Meta:
-        ordering = ['-date']

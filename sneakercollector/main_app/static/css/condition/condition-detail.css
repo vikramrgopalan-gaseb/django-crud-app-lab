@@ -1,0 +1,46 @@
+/* Hero section for the condition name */
+.condition-header {
+    padding: 2rem;
+    border-radius: 12px;
+    color: white; /* Text color; you might want to adjust this based on the background */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.condition-header h1 {
+    margin: 0;
+    font-size: 3rem;
+    text-transform: uppercase;
+}
+
+/* Section for associated sneakers */
+.associated-sneakers {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.associated-sneakers h3 {
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 1rem;
+}
+
+.sneaker-item {
+    padding: 10px;
+    border-bottom: 1px solid #f1f1f1;
+    display: flex;
+    justify-content: space-between;
+}
+
+.sneaker-item a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.sneaker-item a:hover {
+    color: #ff4757;
+}

@@ -68,3 +68,11 @@ def associate_condition(request, sneaker_id, condition_id):
 def remove_condition(request, sneaker_id, condition_id):
     Sneaker.objects.get(id=sneaker_id).condition.remove(condition_id)
     return redirect('sneaker-detail', sneaker_id=sneaker_id)
+
+def sneaker_index(request):
+    sneakers = Sneaker.objects.all() # Make plural
+    return render(request, 'sneakers/index.html', {'sneakers': sneakers}) # Fix key typo
+
+class ConditionCreate(CreateView):
+    model = Condition
+    fields = ['name', 'color'] # Use the actual model fields

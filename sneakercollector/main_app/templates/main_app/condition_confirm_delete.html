@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Delete Condition</h1>
+  
+  <p>Are you sure you want to delete the condition category: <strong>{{ object.name }}</strong>?</p>
+  <p><em>Warning: This will remove this condition from all sneakers currently using it.</em></p>
+
+  <!-- The action="" stays empty because it posts back to the current URL -->
+  <form action="" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Yes - Delete" class="btn danger">
+    <a href="{% url 'condition-index' %}" class="btn">Cancel</a>
+  </form>
+{% endblock %}

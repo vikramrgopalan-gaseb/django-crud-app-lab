@@ -16,3 +16,16 @@
 </form>
 
 {% endblock %}
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Delete Sneaker</h1>
+  <h4>Are you sure you want to delete the {{ object.brand }} {{ object.model }}?</h4>
+
+  <form action="" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Yes - Delete" class="btn danger">
+    <a href="{% url 'sneaker-detail' object.id %}">Cancel</a>
+  </form>
+{% endblock %}

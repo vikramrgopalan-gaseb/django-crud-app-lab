@@ -4,58 +4,12 @@ from . import views
 urlpatterns = [
     path('', views.home, name="home"),
     path('about/', views.about, name="about"),
-    path('sneakers/', views.sneaker_index, name='sneaker-index')
-]
-
-from django.urls import path
-from . import views
-
-urlpatterns = [
-    path('', views.home, name="home"),
-    path('about/', views.about, name="about"),
     path('sneakers/', views.sneaker_index, name='sneaker-index'),
     path('sneakers/<int:sneaker_id>/', views.sneaker_detail, name='sneaker-detail'),
     path('sneakers/create/', views.SneakerCreate.as_view(), name='sneaker-create'),
-    path('sneakers/<int:pk>/update/', views.SneakerUpdate.as_view(), name='snekaer-update'),
+    path('sneakers/<int:pk>/update/', views.SneakerUpdate.as_view(), name='sneaker-update'),
     path('sneakers/<int:pk>/delete/', views.SneakerDelete.as_view(), name='sneaker-delete'),
-]
-
-from django.urls import path
-from . import views
-
-urlpatterns = [
-    path('', views.home, name="home"),
-    path('about/', views.about, name="about"),
-    path('cats/', views.cat_index, name='cat-index'),
-    path('cats/<int:cat_id>/', views.cat_detail, name='cat-detail'),
-    path('cats/create/', views.CatCreate.as_view(), name='cat-create'),
-    path('cats/<int:pk>/update/', views.CatUpdate.as_view(), name='cat-update'),
-    path('cats/<int:pk>/delete/', views.CatDelete.as_view(), name='cat-delete'),
-    path('cats/<int:cat_id>/add-feeding/', views.add_feeding, name='add-feeding'),
-    path('toys/create/', views.ToyCreate.as_view(), name='toy-create'),
-    path('toys/<int:pk>/', views.ToyDetail.as_view(), name='toy-detail'),
-    path('toys/', views.ToyList.as_view(), name='toy-index'),
-    path('toys/<int:pk>/update/', views.ToyUpdate.as_view(), name='toy-update'),
-    path('toys/<int:pk>/delete/', views.ToyDelete.as_view(), name='toy-delete'),
-]
-
-from django.urls import path
-from . import views
-
-urlpatterns = [
-    path('', views.home, name="home"),
-    path('about/', views.about, name="about"),
-    path('cats/', views.cat_index, name='cat-index'),
-    path('cats/<int:cat_id>/', views.cat_detail, name='cat-detail'),
-    path('cats/create/', views.CatCreate.as_view(), name='cat-create'),
-    path('cats/<int:pk>/update/', views.CatUpdate.as_view(), name='cat-update'),
-    path('cats/<int:pk>/delete/', views.CatDelete.as_view(), name='cat-delete'),
-    path('cats/<int:cat_id>/add-feeding/', views.add_feeding, name='add-feeding'),
-    path('toys/create/', views.ToyCreate.as_view(), name='toy-create'),
-    path('toys/<int:pk>/', views.ToyDetail.as_view(), name='toy-detail'),
-    path('toys/', views.ToyList.as_view(), name='toy-index'),
-    path('toys/<int:pk>/update/', views.ToyUpdate.as_view(), name='toy-update'),
-    path('toys/<int:pk>/delete/', views.ToyDelete.as_view(), name='toy-delete'),
-    path('cats/<int:cat_id>/associate-toy/<int:toy_id>/', views.associate_toy, name='associate-toy'),
-    path('cats/<int:cat_id>/remove-toy/<int:toy_id>/', views.remove_toy, name='remove-toy')
+    # Add these so your collection/condition logic works:
+    path('sneakers/<int:sneaker_id>/add_collecting/', views.add_collecting, name='add-collecting'),
+    path('sneakers/<int:sneaker_id>/assoc_condition/<int:condition_id>/', views.associate_condition, name='associate-condition'),
 ]

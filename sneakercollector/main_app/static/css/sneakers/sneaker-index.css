@@ -1,0 +1,56 @@
+/* static/css/sneakers/index.css */
+
+h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Container for all the cards */
+.sneaker-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Individual Card Styling */
+.sneaker-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  padding: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-align: center;
+}
+
+.sneaker-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.sneaker-card a {
+  text-decoration: none;
+  color: #222;
+}
+
+.sneaker-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  color: #ff4757; /* Using that sneaker-red we picked earlier */
+}
+
+.sneaker-card p {
+  color: #666;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+/* Responsive: Cards stack better on small screens */
+@media (max-width: 400px) {
+  .sneaker-card {
+    width: 100%;
+  }
+}
