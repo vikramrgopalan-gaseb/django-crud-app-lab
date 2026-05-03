@@ -4,8 +4,7 @@ from .models import Collection
 class CollectingForm(forms.ModelForm):
     class Meta:
         model = Collection
-        # 'meal' must match the field name in your Collection model
-        fields = ['date', 'meal'] 
+        fields = ['date', 'condition'] 
         widgets = {
             'date': forms.DateInput(
                 format=('%Y-%m-%d'),

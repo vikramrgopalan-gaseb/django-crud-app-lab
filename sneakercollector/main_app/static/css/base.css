@@ -1,6 +1,6 @@
 /* static/css/base.css */
 
-/* 1. Global Resets */
+
 * {
     margin: 0;
     padding: 0;
@@ -14,7 +14,7 @@ body {
     line-height: 1.6;
 }
 
-/* 2. Header & Navigation */
+
 header {
     background-color: #222;
     color: white;
@@ -44,10 +44,10 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    color: #ff4757; /* A classic "sneakerhead" red */
+    color: #ff4757; 
 }
 
-/* 3. Main Content Layout */
+
 main {
     max-width: 1100px;
     margin: 2rem auto;
@@ -60,7 +60,7 @@ h1 {
     color: #222;
 }
 
-/* 4. Global Utility Classes (Buttons & Links) */
+
 .btn {
     display: inline-block;
     padding: 10px 20px;
@@ -85,7 +85,7 @@ h1 {
     background-color: #ff7675;
 }
 
-/* 5. Responsive Design */
+
 @media (max-width: 768px) {
     header {
         flex-direction: column;

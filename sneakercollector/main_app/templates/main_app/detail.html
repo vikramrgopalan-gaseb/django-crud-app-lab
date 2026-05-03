@@ -8,7 +8,7 @@
 {% block content %}
 <section class="sneaker-container">
   <div class="sneaker-img">
-    <!-- Updated to a sneaker-related image name -->
+    
     <img src="{% static 'images/splash.svg' %}" alt="{{ sneaker.brand }} {{ sneaker.model }}" />
   </div>
   <div class="sneaker-details">
@@ -26,7 +26,7 @@
 <hr>
 
 <div class="collection-condition-container">
-  <!-- Section 1: Collection Log (One-to-Many) -->
+  
   <section class="collection-log">
     <div class="subsection-title">
       <h2>Collection Log</h2>
@@ -46,14 +46,14 @@
         {% for item in sneaker.collection_set.all %}
           <tr>
             <td>{{ item.date }}</td>
-            <td>{{ item.get_meal_display }}</td>
+            <td>{{ item.get_condition_display }}</td>
           </tr>
         {% endfor %}
       </tbody>
     </table>
   </section>
 
-  <!-- Section 2: Conditions (Many-to-Many) -->
+  
   <section class="conditions">
     <h3>Current Tags</h3>
     <div class="tags-container">

@@ -22,11 +22,11 @@ class Sneaker(models.Model):
     model = models.CharField(max_length=100)
     colorway = models.TextField(max_length=250)
     year = models.IntegerField()
-    # This creates the Many-to-Many relationship
+    
     conditions = models.ManyToManyField(Condition)
 
     def __str__(self):
-        # We use brand and model because 'name' doesn't exist as a field
+        
         return f"{self.brand} {self.model}"
     
     def get_absolute_url(self):
@@ -34,13 +34,13 @@ class Sneaker(models.Model):
     
 class Collection(models.Model):
     date = models.DateField("Collection Date")
-    # We'll use 'meal' as the field name to match your views/forms logic
-    meal = models.CharField(
+    
+    condition = models.CharField(
         max_length=3, 
         choices=CONDITION_CHOICES, 
         default=CONDITION_CHOICES[0][0]
     )
-    # This links the collection entry to a specific sneaker
+    
     sneaker = models.ForeignKey(Sneaker, on_delete=models.CASCADE)
 
     def __str__(self):

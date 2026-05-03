@@ -5,17 +5,17 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 80vh; /* Centers content vertically on the screen */
+  min-height: 80vh; 
   text-align: center;
   padding: 20px;
 }
 
 .sneaker-container img {
   width: 100%;
-  max-width: 500px; /* Limits the size of the splash sneaker */
+  max-width: 500px; 
   height: auto;
   margin-bottom: 2rem;
-  /* Optional: Adds a subtle entrance animation */
+  
   animation: float 4s ease-in-out infinite;
 }
 
@@ -25,14 +25,14 @@
   height: auto;
 }
 
-/* Optional floating animation for the sneaker */
+
 @keyframes float {
   0% { transform: translateY(0px); }
   50% { transform: translateY(-20px); }
   100% { transform: translateY(0px); }
 }
 
-/* Responsive adjustment for smaller screens */
+
 @media only screen and (max-width: 600px) {
   .sneaker-container img {
     max-width: 300px;

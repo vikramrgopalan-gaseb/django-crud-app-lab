@@ -8,18 +8,18 @@
 {% block content %}
 <section class="page-header">
   <h1>My Sneaker Collection</h1>
-  <!-- Using your splash image since we know that path works -->
+  
   <img src="{% static 'images/splash.svg' %}" alt="Cool Sneakers" style="width: 100px;"/>
 </section>
 
 <section class="sneaker-container">
   {% for sneaker in sneakers %}
     <div class="sneaker-card">
-    <!-- Links to the sneaker-detail route using the sneaker's ID -->
+    
     <a href="{% url 'sneaker-detail' sneaker.id %}">
       <div class="card-content">
         <div class="card-img-container">
-          <!-- Placeholder image for the card -->
+          
           <img src="{% static 'images/header-logo.svg' %}" alt="Sneaker Icon" />
         </div>
         <h2 class="card-title">{{ sneaker.brand }} {{ sneaker.model }}</h2>

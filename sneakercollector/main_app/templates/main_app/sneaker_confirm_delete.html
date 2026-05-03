@@ -2,25 +2,25 @@
 {% load static %} 
 
 {% block head %}
-<!-- Adding a link to your form/base CSS for consistent button styling -->
+
 <link rel="stylesheet" href="{% static 'css/form.css' %}" />
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
   <h1>Delete Sneaker?</h1>
-  <!-- Fixed typo in the image filename (snekaer -> sneaker) -->
+  
   <img src="{% static 'images/splash.svg' %}" alt="Warning Icon" style="width: 100px;" />
 </div>
 
 <section class="confirm-delete">
-  <!-- Fixed: Use 'object' instead of 'sneaker' to show the actual name -->
+  
   <h2>Are you sure you want to delete the <strong>{{ object.brand }} {{ object.model }}</strong>?</h2>
   <p>This action cannot be undone.</p>
 
   <form action="" method="POST" class="form">
     {% csrf_token %}
-    <!-- Ensure the Cancel button takes you back to the right place -->
+    
     <a href="{% url 'sneaker-detail' object.id %}" class="btn secondary">Cancel</a>
     <button type="submit" class="btn danger">Yes - Delete!</button>
   </form>
