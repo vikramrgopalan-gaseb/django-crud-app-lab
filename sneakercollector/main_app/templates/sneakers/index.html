@@ -1,68 +1,35 @@
-{% extends 'base.html' %} {% load static %} {% block head %}
-<link
-  rel="stylesheet"
-  href="{% static 'css/sneakers/sneaker-index.css' %}"
-/>
-{% endblock %} {% block content %}
+{% extends 'base.html' %} 
+{% load static %} 
 
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/sneakers/sneaker-index.css' %}" />
+{% endblock %} 
+
+{% block content %}
 <section class="page-header">
-  <h1>Sneaker List</h1>
-  <img
-    src="{% static 'images/cool-sneaker.svg' %}"
-    alt="A cool sneaker"
-  />
-  <img
-    src="{% static 'images/happy-sneaker.svg' %}"
-    alt="A happy sneaker"
-  />
-  <img
-    src="{% static 'images/teacup-sneaker.svg' %}"
-    alt="A sneaker in a teacup"
-  />
-  <img
-    src="{% static 'images/sneaker-in-box.svg' %}"
-    alt="A sneaker in a box"
-  />
+  <h1>My Sneaker Collection</h1>
+  <!-- Using your splash image since we know that path works -->
+  <img src="{% static 'images/splash.svg' %}" alt="Cool Sneakers" style="width: 100px;"/>
 </section>
 
-<section class="card-container">
+<section class="sneaker-container">
   {% for sneaker in sneakers %}
-  <div class="card">
+    <div class="sneaker-card">
+    <!-- Links to the sneaker-detail route using the sneaker's ID -->
     <a href="{% url 'sneaker-detail' sneaker.id %}">
-    <div class="card-content">
-      <div class="card-img-container">
-        <img
-          src="{% static 'images/sk8r-boi-cat.svg' %}"
-          alt="A skater boy sneaker"
-        />
+      <div class="card-content">
+        <div class="card-img-container">
+          <!-- Placeholder image for the card -->
+          <img src="{% static 'images/header-logo.svg' %}" alt="Sneaker Icon" />
+        </div>
+        <h2 class="card-title">{{ sneaker.brand }} {{ sneaker.model }}</h2>
+        <p><strong>Colorway:</strong> {{ sneaker.colorway }}</p>
+        <p><small>Year: {{ sneaker.year }}</small></p>
       </div>
-      <h2 class="card-title">{{ sneaker.name }}</h2>
-      {% if sneaker.age > 0 %}
-      <p>A {{ sneaker.age }} year old {{ sneaker.breed }}</p>
-      {% else %}
-      <p>A {{ sneaker.breed }} kitten.</p>
-      {% endif %}
-      <p><small>{{ sneaker.description }}</small></p>
-    </div>
-   </a>
+    </a>
   </div>
+  {% empty %}
+    <p>No sneakers in the collection yet. <a href="{% url 'sneaker-create' %}">Add one!</a></p>
   {% endfor %}
 </section>
-
-{% endblock %}
-
-{% extends 'base.html' %}
-{% block content %}
-
-<h1>Sneaker List</h1>
-
-{% for sneaker in sneakers %}
-  <div class="sneaker-card">
-    <a href="{% url 'sneaker-detail' sneaker.id %}">
-      <h3>{{ sneaker.brand }} - {{ sneaker.model }}</h3>
-    </a>
-    <p>{{ sneaker.colorway }}</p>
-  </div>
-{% endfor %}
-
 {% endblock %}

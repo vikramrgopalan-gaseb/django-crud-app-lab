@@ -1,21 +1,21 @@
-{% extends 'base.html' %} 
-{% load static %} 
+{% extends 'base.html' %}
+{% load static %}
+
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/sneakers/sneaker-detail.css' %}" />
-{% endblock %} 
+{% endblock %}
+
 {% block content %}
 <section class="sneaker-container">
   <div class="sneaker-img">
-    <img src="{% static 'images/sk8r-boi-cat.svg' %}" alt="A skater boy cat" />
+    <!-- Updated to a sneaker-related image name -->
+    <img src="{% static 'images/splash.svg' %}" alt="{{ sneaker.brand }} {{ sneaker.model }}" />
   </div>
   <div class="sneaker-details">
-    <h1>{{ sneaker.name }}</h1>
-    {% if sneaker.age > 0 %}
-      <h2>A {{ sneaker.age }} year old {{ sneaker.breed }}</h2>
-    {% else %}
-      <h2>A {{ sneaker.breed }} kitten.</h2>
-    {% endif %}
-    <p>{{ sneaker.description }}</p>
+    <h1>{{ sneaker.brand }} {{ sneaker.model }}</h1>
+    <p><strong>Colorway:</strong> {{ sneaker.colorway }}</p>
+    <p><strong>Year:</strong> {{ sneaker.year }}</p>
+    
     <div class="sneaker-actions">
         <a href="{% url 'sneaker-update' sneaker.id %}" class="btn warn">Edit</a>
         <a href="{% url 'sneaker-delete' sneaker.id %}" class="btn danger">Delete</a>
@@ -23,100 +23,67 @@
   </div>
 </section>
 
-<div class="feedings-toy-container">
-  <section class="feedings">
+<hr>
+
+<div class="collection-condition-container">
+  <!-- Section 1: Collection Log (One-to-Many) -->
+  <section class="collection-log">
     <div class="subsection-title">
-      <h2>Feedings</h2>
-      <img
-        src="{% static 'images/cat-cone.svg' %}"
-        alt="An ice cream cone cat"
-      />
-      <img src="{% static 'images/cat-onigiri.svg' %}" alt="A cat as onigiri" />
-      <img
-        src="{% static 'images/kitty-kabob.svg' %}"
-        alt="A kabob of kittens"
-      />
+      <h2>Collection Log</h2>
     </div>
+    
+    <form action="{% url 'add-collecting' sneaker.id %}" method="POST" class="log-form">
+      {% csrf_token %}
+      {{ collecting_form.as_p }}
+      <button type="submit" class="btn">Add Log Entry</button>
+    </form>
+
     <table>
       <thead>
-        <tr>
-          <th>Date</th>
-          <th>Meal</th>
-        </tr>
+        <tr><th>Date</th><th>Status</th></tr>
       </thead>
       <tbody>
-        {% for feeding in cat.feeding_set.all %}
+        {% for item in sneaker.collection_set.all %}
           <tr>
-            <td>{{feeding.date}}</td>
-            <td>{{feeding.get_meal_display}}</td>
+            <td>{{ item.date }}</td>
+            <td>{{ item.get_meal_display }}</td>
           </tr>
         {% endfor %}
       </tbody>
     </table>
   </section>
+
+  <!-- Section 2: Conditions (Many-to-Many) -->
+  <section class="conditions">
+    <h3>Current Tags</h3>
+    <div class="tags-container">
+      {% if sneaker.conditions.all.count > 0 %}
+        {% for cond in sneaker.conditions.all %}
+          <div class="card">
+            <span style="color: {{ cond.color }}">{{ cond.name }}</span>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p>No condition tags assigned yet.</p>
+      {% endif %}
+    </div>
+
+    <h3>Available Tags</h3>
+    <div class="available-tags">
+      {% if conditions.count > 0 %}
+        {% for cond in conditions %}
+          <div class="card">
+            <span style="color: {{ cond.color }}">{{ cond.name }}</span>
+            <form action="{% url 'associate-condition' sneaker.id cond.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn small">Add</button>
+            </form>
+          </div>
+        {% endfor %}
+      {% else %}
+        <h5>All tags have been assigned.</h5>
+      {% endif %}
+    </div>
+  </section>
 </div>
 {% endblock %}
-
-{% extends 'base.html' %}
-{% block content %}
-
-<div class="sneaker-details">
-  <h1>{{ sneaker.brand }} {{ sneaker.model }}</h1>
-  <p>Colorway: {{ sneaker.colorway }}</p>
-  <p>Year: {{ sneaker.year }}</p>
-  
-  <div class="actions">
-    <a href="{% url 'sneaker-update' sneaker.id %}">Edit</a>
-    <a href="{% url 'sneaker-delete' sneaker.id %}">Delete</a>
-  </div>
-</div>
-
-<hr>
-
-<div class="collection-section">
-  <h3>Collection Log</h3>
-  <!-- Form to add a new Collection entry -->
-  <form action="{% url 'add-collecting' sneaker.id %}" method="POST">
-    {% csrf_token %}
-    {{ collecting_form.as_p }}
-    <button type="submit">Add Log Entry</button>
-  </form>
-
-  <table>
-    <thead>
-      <tr><th>Date</th><th>Condition</th></tr>
-    </thead>
-    <tbody>
-      {% for item in sneaker.collection_set.all %}
-        <tr>
-          <td>{{ item.date }}</td>
-          <td>{{ item.get_meal_display }}</td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
-
-{% endblock %}
-
-<div class="available-conditions">
-  <h3>Available Conditions for this Sneaker</h3>
-  {% if condition.count %}
-    {% for cond in condition %}
-      <div class="card">
-        <div class="card-content" style="color: {{ cond.color }}">
-          <span>{{ cond.name }}</span>
-        </div>
-        <div class="card-action">
-          <!-- This form triggers your associate_condition view -->
-          <form action="{% url 'associate-condition' sneaker.id cond.id %}" method="POST">
-            {% csrf_token %}
-            <button type="submit" class="btn">Add</button>
-          </form>
-        </div>
-      </div>
-    {% endfor %}
-  {% else %}
-    <h5>All available conditions have been assigned.</h5>
-  {% endif %}
-</div>

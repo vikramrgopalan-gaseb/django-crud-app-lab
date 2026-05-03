@@ -1,13 +1,18 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/conditions/condition-detail.css' %}" />
+{% endblock %}
 
 {% block content %}
   <h1>Add a New Condition Category</h1>
 
-  <form action="" method="POST">
+  <form action="" method="POST" class="form-container">
     {% csrf_token %}
     <table>
       {{ form.as_table }}
     </table>
-    <input type="submit" value="Add Condition" class="btn">
+    <button type="submit" class="btn">Add Condition</button>
   </form>
 {% endblock %}

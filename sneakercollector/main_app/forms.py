@@ -4,11 +4,14 @@ from .models import Collection
 class CollectingForm(forms.ModelForm):
     class Meta:
         model = Collection
-        # Ensure these match the variable names in class Collection(models.Model)
-        fields = ['date', 'condition']
+        # 'meal' must match the field name in your Collection model
+        fields = ['date', 'meal'] 
         widgets = {
             'date': forms.DateInput(
                 format=('%Y-%m-%d'),
-                attrs={'type': 'date'}
-            ),
+                attrs={
+                    'placeholder': 'Select a Date',
+                    'type': 'date'
+                }
+            )
         }

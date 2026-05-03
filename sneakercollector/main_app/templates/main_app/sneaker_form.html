@@ -1,43 +1,28 @@
 {% extends 'base.html' %} 
 {% load static %} 
+
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/form.css' %}" />
 {% endblock %} 
-{% block content %}
 
+{% block content %}
 <div class="page-header">
-    {% if sneaker %}
-        <h1>Edit {{ sneaker.name }}</h1>
+    {% if object %}
+        <!-- CBVs use 'object' to refer to the record being edited -->
+        <h1>Edit {{ object.brand }} {{ object.model }}</h1>
     {% else %}
         <h1>Add a Sneaker</h1>
     {% endif %}
-  <img src="{% static 'images/nerd-sneaker.svg' %}" alt="A sneaker using a computer" />
+    <!-- Ensure this image exists in static/images or use splash.svg -->
+    <img src="{% static 'images/splash.svg' %}" alt="Sneaker Form Icon" style="width: 100px;"/>
 </div>
 
-<form action="" method="post" class="form-container">
+<!-- Leave action empty so it posts back to the same URL -->
+<form action="" method="POST" class="form-container">
   {% csrf_token %}
   <table>
     {{ form.as_table }}
   </table>
   <button type="submit" class="btn submit">Submit!</button>
 </form>
-
-{% endblock %}
-
-{% extends 'base.html' %}
-
-{% block content %}
-  {% if object %}
-    <h1>Edit {{ object.brand }} {{ object.model }}</h1>
-  {% else %}
-    <h1>Add a Sneaker</h1>
-  {% endif %}
-
-  <form action="" method="POST">
-    {% csrf_token %}
-    <table>
-      {{ form.as_table }}
-    </table>
-    <input type="submit" value="Submit!" class="btn">
-  </form>
 {% endblock %}

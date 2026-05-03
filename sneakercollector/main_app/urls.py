@@ -12,4 +12,5 @@ urlpatterns = [
     # Add these so your collection/condition logic works:
     path('sneakers/<int:sneaker_id>/add_collecting/', views.add_collecting, name='add-collecting'),
     path('sneakers/<int:sneaker_id>/assoc_condition/<int:condition_id>/', views.associate_condition, name='associate-condition'),
+    path('sneakers/<int:sneaker_id>/unassoc_condition/<int:condition_id>/', views.remove_condition, name='unassociate-condition'),
 ]

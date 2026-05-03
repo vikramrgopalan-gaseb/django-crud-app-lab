@@ -52,7 +52,8 @@ form textarea:focus {
     transition: background-color 0.3s ease;
 }
 
-input[type="submit"].btn {
+input[type="submit"].btn,
+button[type="submit"].btn {
     background-color: #28a745;
     color: white;
     width: 100%;
